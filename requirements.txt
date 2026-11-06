@@ -1,0 +1,7 @@
+mkdocs-material
+mkdocs-gen-files
+mkdocs-spellcheck[all]
+mkdocs-macros-plugin
+pymdown-extensions>=10.11.1
+mkdocs-glightbox
+Jinja2

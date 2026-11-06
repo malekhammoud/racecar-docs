@@ -1,0 +1,157 @@
+site_name: racecar
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    - scheme: slate
+      primary: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.footer
+    - navigation.instant
+    - navigation.indexes
+    - search.suggest
+    - content.code.copy
+    - content.tooltips
+
+  icon:
+    repo: fontawesome/brands/github
+    logo: material/book-open-variant
+  favicon: assets/favicon.svg
+
+extra_css:
+  - stylesheets/extra.css
+  - https://unpkg.com/katex@0/dist/katex.min.css
+
+extra_javascript:
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+
+copyright: Copyright &copy; McMaster Formula Electric
+
+plugins:
+  - search
+  - gen-files:
+      scripts:
+          - docs/tutorials/index_gen.py
+          - includes/gen_glossary.py
+  - spellcheck:
+      backends:  # the backends you want to use
+      - symspellpy  # as strings
+      - codespell:  # or nested configs
+          dictionaries: [clear]
+
+      # known_words can also be a list of words
+      known_words: ../includes/known_words.txt
+
+      # ignore words in <code> tags
+      ignore_code: yes
+
+      # minimum length of words to consider
+      min_length: 2
+
+      # maximum number of capital letters in a word
+      max_capital: 1
+
+      # keep unicode characters
+      allow_unicode: no
+
+      # skip files entirely (supports Unix shell-style wildcards)
+      skip_files:
+      - credits.md
+      - coverage.md
+
+      # whether to only check in strict mode
+      strict_only: yes
+  - glightbox:
+      effect: none
+      slide_effect: none
+
+markdown_extensions:
+  - admonition
+  - abbr
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.keys
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
+      base_path:
+        - !relative
+        - !relative $docs_dir/../
+  - pymdownx.arithmatex:
+      generic: true 
+
+repo_url: https://github.com/macformula/racecar
+repo_name: macformula/racecar
+
+extra:
+  social:
+    - icon: material/web
+      link: https://macformularacing.com/
+    - icon: material/email
+      link: mailto:formula@mcmaster.ca
+    - icon: fontawesome/brands/github
+      link: https://github.com/macformula
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/company/mac-formula-electric/
+    - icon: fontawesome/brands/instagram
+      link: https://www.instagram.com/macformulaelectric/
+    - icon: fontawesome/brands/facebook
+      link: https://www.facebook.com/MACFormulaElectric/
+
+nav:
+  - Home:
+    - index.md
+  - Architecture:
+    - architecture/index.md
+    - Software layout: architecture/software.md
+    - CAN: architecture/can.md
+    - Startup and governor: architecture/startup.md
+    - Front controller: architecture/front-controller.md
+    - LV controller: architecture/lv-controller.md
+    - Dashboard: architecture/dashboard.md
+    - TMS: architecture/tms.md
+    - Build and tools: architecture/tools.md
+    - Implementation notes: architecture/known-gaps.md
+  - Firmware:
+    - firmware/index.md
+    - firmware/dev-setup/index.md
+    - firmware/using-vscode-pio/index.md
+    - firmware/flashing/index.md
+    - firmware/can-traffic/index.md
+  - Tutorials:
+    - tutorials/index.md
+    # - tutorials/git.md
+    - tutorials/wsl-can/index.md
+    - tutorials/ssh-signing/index.md
+    - tutorials/busmaster/index.md
+    - tutorials/orion-bms/index.md
+    - tutorials/site-dev.md
+  - Glossary: glossary.md
+
+watch:
+  - includes
